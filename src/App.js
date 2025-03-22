@@ -9,6 +9,10 @@ import EchoPage from './pages/EchoPage'
 import BurnPage from './pages/BurnPage'
 import {Toaster} from 'react-hot-toast'
 import {ConfigProvider} from "./contexts/ConfigContext"
+import DashboardPage from './pages/DashboardPage'
+import QrPaymentPage from './pages/QrPaymentPage'
+import SavingsPage from './pages/SavingsPage'
+import NotificationsPage from './pages/NotificationsPage'
 
 export function Layout({children}) {
     return (
@@ -31,6 +35,11 @@ function App() {
                                 <Route path="/" element={<StartPage/>}/>
                                 <Route path="/echo" element={<EchoPage/>}/>
                                 <Route path="/burn" element={<BurnPage/>}/>
+                                <Route path="/dashboard" element={<DashboardPage />} /> {/* NUEVO */}
+                                <Route path="/qr" element={<QrPaymentPage />} /> {/* NUEVO */}
+                                <Route path="/savings" element={<SavingsPage />} /> {/* NUEVO */}
+                                <Route path="/notifications" element={<NotificationsPage />} /> {/* NUEVO */}
+
                             </Routes>
                             <Toaster
                                 position="top-right"
