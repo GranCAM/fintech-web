@@ -1,19 +1,35 @@
 import React, { useState } from 'react'
+import { useNotifications } from '../contexts/NotificationContext' // ✅ Contexto de notificaciones
 
 const SavingsPage = () => {
     const [savings, setSavings] = useState(275.30) // mock
     const [percentage, setPercentage] = useState(10) // mock: % ahorro
     const [confirmation, setConfirmation] = useState(null)
 
+    const { addNotification } = useNotifications() // ✅ Hook del contexto
+
     const handleWithdraw = () => {
         if (savings <= 0) {
             setConfirmation('No hay fondos para retirar.')
+            addNotification({
+                type: 'warning',
+                title: 'Intento de retiro sin fondos',
+                message: 'El usuario intentó retirar sin saldo disponible.'
+            })
             return
         }
 
+        const amountWithdrawn = savings
+
         // Simula retiro
         setSavings(0)
-        setConfirmation('💸 Has retirado tus ahorros con éxito.')
+        setConfirmation(`💸 Has retirado $${amountWithdrawn.toFixed(2)} de tus ahorros.`)
+
+        addNotification({
+            type: 'success',
+            title: 'Retiro realizado',
+            message: `Has retirado $${amountWithdrawn.toFixed(2)} de tus ahorros.`
+        })
     }
 
     return (

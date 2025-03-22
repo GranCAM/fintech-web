@@ -13,6 +13,7 @@ import DashboardPage from './pages/DashboardPage'
 import QrPaymentPage from './pages/QrPaymentPage'
 import SavingsPage from './pages/SavingsPage'
 import NotificationsPage from './pages/NotificationsPage'
+import { NotificationProvider } from './contexts/NotificationContext'
 
 export function Layout({children}) {
     return (
@@ -27,33 +28,35 @@ export function Layout({children}) {
 function App() {
     return (
         <ConfigProvider>
-            <QubicConnectCombinedProvider>
-                <HM25Provider>
-                    <BrowserRouter>
-                        <Layout>
-                            <Routes>
-                                <Route path="/" element={<StartPage/>}/>
-                                <Route path="/echo" element={<EchoPage/>}/>
-                                <Route path="/burn" element={<BurnPage/>}/>
-                                <Route path="/dashboard" element={<DashboardPage />} /> {/* NUEVO */}
-                                <Route path="/qr" element={<QrPaymentPage />} /> {/* NUEVO */}
-                                <Route path="/savings" element={<SavingsPage />} /> {/* NUEVO */}
-                                <Route path="/notifications" element={<NotificationsPage />} /> {/* NUEVO */}
+            <NotificationProvider> {/* NUEVO */} 
+                <QubicConnectCombinedProvider>
+                    <HM25Provider>
+                        <BrowserRouter>
+                            <Layout>
+                                <Routes>
+                                    <Route path="/" element={<StartPage/>}/>
+                                    <Route path="/echo" element={<EchoPage/>}/>
+                                    <Route path="/burn" element={<BurnPage/>}/>
+                                    <Route path="/dashboard" element={<DashboardPage />} /> {/* NUEVO */}
+                                    <Route path="/qr" element={<QrPaymentPage />} /> {/* NUEVO */}
+                                    <Route path="/savings" element={<SavingsPage />} /> {/* NUEVO */}
+                                    <Route path="/notifications" element={<NotificationsPage />} /> {/* NUEVO */}
 
-                            </Routes>
-                            <Toaster
-                                position="top-right"
-                                toastOptions={{
-                                    style: {
-                                        background: "#202E3C",
-                                        color: "#fff",
-                                    },
-                                }}
-                            />
-                        </Layout>
-                    </BrowserRouter>
-                </HM25Provider>
-            </QubicConnectCombinedProvider>
+                                </Routes>
+                                <Toaster
+                                    position="top-right"
+                                    toastOptions={{
+                                        style: {
+                                            background: "#202E3C",
+                                            color: "#fff",
+                                        },
+                                    }}
+                                />
+                            </Layout>
+                        </BrowserRouter>
+                    </HM25Provider>
+                </QubicConnectCombinedProvider>
+            </NotificationProvider> {/* NUEVO */}
         </ConfigProvider>
     )
 }
