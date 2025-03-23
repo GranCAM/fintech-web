@@ -16,9 +16,19 @@ module.exports = {
                 blink: {
                     '50%': { opacity: '0' },
                 },
+                enter: {
+                    '0%': { opacity: 0, transform: 'translateY(-10px)' },
+                    '100%': { opacity: 1, transform: 'translateY(0)' },
+                },
+                leave: {
+                    '0%': { opacity: 1, transform: 'translateY(0)' },
+                    '100%': { opacity: 0, transform: 'translateY(-10px)' },
+                },
             },
             animation: {
                 blink: 'blink 1s infinite',
+                enter: 'enter 0.3s ease-out',
+                leave: 'leave 0.2s ease-in',
             },
             colors: ({ colors }) => ({
                 inherit: colors.inherit,

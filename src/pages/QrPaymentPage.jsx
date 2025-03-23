@@ -34,23 +34,30 @@ const QrPaymentPage = () => {
 
         // ✅ Marca como completado
         setPaymentConfirmed(true)
+        setAmount('')
+        setDescription('')
+        setQrData(null)
 
-        // 🧠 Aquí va el llamado real al backend (lo dejas preparado así):
+        // ✅ Cuando tengas la API lista, descomenta esta parte:
         /*
-        const response = await fetch('/api/process-payment', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                amount: parseFloat(amount),
-                description,
-            }),
-        })
+        try {
+            const result = await sendQrPayment({ amount, description })
 
-        const result = await response.json()
-        if (result.success) {
-            // Puedes mostrar un toast o actualizar estado
-        } else {
-            console.error('Error al procesar el pago:', result)
+            if (result.success) {
+                // Puedes mostrar una notificación de éxito o actualizar estado
+            } else {
+                addNotification({
+                    type: 'warning',
+                    title: 'Pago fallido',
+                    message: result.message || 'No se pudo procesar el pago.',
+                })
+            }
+        } catch (error) {
+            addNotification({
+                type: 'warning',
+                title: 'Error de red',
+                message: error.message || 'Hubo un error al conectar con el servidor.',
+            })
         }
         */
     }

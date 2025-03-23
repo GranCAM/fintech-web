@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import { useNotifications } from '../contexts/NotificationContext'
 
 const DashboardPage = () => {
-    // Mock data
-    const balance = 1200.75
-    const savings = 275.30
+    const { notifications } = useNotifications()
+
+    // 🎯 Meta mock (puedes hacerla dinámica luego)
     const savingsGoal = 500
 
+    // 🧮 Calcular ahorro acumulado desde notificaciones de tipo 'saving'
+    const savings = useMemo(() => {
+        return notifications
+            .filter((n) => n.type === 'saving')
+            .reduce((total, n) => {
+                const match = n.message.match(/[\d.]+/)
+                return match ? total + parseFloat(match[0]) : total
+            }, 0)
+    }, [notifications])
+
+    // 💵 Simular balance como ahorro más un extra mock
+    const balance = savings + 925.45 // puedes ajustar este mock como quieras
+
+    // 📈 Progreso hacia la meta
     const progress = Math.min((savings / savingsGoal) * 100, 100).toFixed(0)
 
     return (
